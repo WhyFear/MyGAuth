@@ -158,7 +158,7 @@ which gunicorn
 
 修改下面的两个内容：/var/www/gauth/ 、/usr/local/python3/bin/gunicorn、48224
 
-48224可以改为自己喜欢的端口，如果没有前置代理，可以设置为80。但是我建议这样做。
+48224可以改为自己喜欢的端口，如果没有前置代理，可以设置为80。但是我不建议这样做。
 
 ```shell
 nano /etc/systemd/system/gauth.service
