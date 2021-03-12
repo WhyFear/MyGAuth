@@ -156,7 +156,7 @@ which gunicorn
 
 修改下面的两个内容：/var/www/gauth/ 、/usr/local/python3/bin/gunicorn、48224
 
-48224可以改为自己喜欢的端口，如果没有前置代理，可以设置为80
+48224可以改为自己喜欢的端口，如果没有前置代理，可以设置为80。但是我建议这样做。
 
 ```shell
 nano /etc/systemd/system/gauth.service
@@ -174,6 +174,31 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
-
 ```
 
+保存退出
+
+```shell
+systemctl daemon-reload
+systemctl start gauth
+# 查看运行状态
+systemctl status gauth
+# 如果运行状态是运行中
+systemctl enable gauth
+```
+
+### caddy设置
+
+如果你使用nginx可以参考其他文章的配置方法，下面给出我caddy1的配置方法
+
+```shell
+https://your.website.name {
+  tls ***@***.com
+  root /var/www/gauth
+  proxy / localhost:48224 {
+      transparent
+  }
+}
+```
+
+到此，设置完毕，可以开始使用了。
