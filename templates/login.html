@@ -6,63 +6,63 @@
     <meta charset="UTF-8">
     <!--必要样式-->
     <!-- <link rel="stylesheet" type="text/css" href="css/styles.css"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico" />
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css',_external=True )}}">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico"/>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css',_external=True ) }}">
 </head>
 
 <body>
 
-    <div class='login'>
-        <div class='login_title'>
-            <span>账号登录</span>
-        </div>
-        <div class='login_fields'>
-            <form action="{{ url_for('login') }}" method="POST">
-                {{ form.csrf_token }}
-                <div class='login_fields__user'>
-                    <div class='icon'>
-                        <img src='/static/img/user_icon_copy.png'>
-                    </div>
-                    <!-- <input type="text" name="userid" id="userid" placeholder="用户名"> -->
-                    {{ form.name }}
-                    <div class='validation'>
-                        <img src='/static/img/tick.png'>
-                    </div>
-                    </input>
-                </div>
-                
-                <div class='login_fields__password'>
-                    <div class='icon'>
-                        <img src='/static/img/lock_icon_copy.png'>
-                    </div>
-                    <!-- <input type="password" name="password" id="password" placeholder="密码"></input> -->
-                    {{ form.password }}
-                    <div class='validation'>
-                        <img src='/static/img/tick.png'>
-                    </div>
-                </div>
-
-                <ul>
-                    {% for error in form.name.error %}
-                    <li style="coloured:red;">{{ error }}</li>
-                    {% endfor %}
-                </ul>
-
-                {{ form.recaptcha }}
-                
-                <div class='login_fields__submit'>
-                    <input type="submit" name="submit"></input>
-                    <div class='forgot'>
-                        <a href='#'>忘记密码?</a>
-                    </div>
-                </div>
-
-            </form>
-        </div>
-        <div class='disclaimer'>
-            <p>这世上有三样东西是别人抢不走的：一是吃进胃里的食物，二是藏在心中的梦想，三是读进大脑的书。</p>
-        </div>
+<div class='login'>
+    <div class='login_title'>
+        <span>账号登录</span>
     </div>
+    <div class='login_fields'>
+        <form action="{{ url_for('login') }}" method="POST">
+            {{ form.csrf_token }}
+            <div class='login_fields__user'>
+                <div class='icon'>
+                    <img src='/static/img/user_icon_copy.png'>
+                </div>
+                <!-- <input type="text" name="userid" id="userid" placeholder="用户名"> -->
+                {{ form.name }}
+                <div class='validation'>
+                    <img src='/static/img/tick.png'>
+                </div>
+                </input>
+            </div>
+
+            <div class='login_fields__password'>
+                <div class='icon'>
+                    <img src='/static/img/lock_icon_copy.png'>
+                </div>
+                <!-- <input type="password" name="password" id="password" placeholder="密码"></input> -->
+                {{ form.password }}
+                <div class='validation'>
+                    <img src='/static/img/tick.png'>
+                </div>
+            </div>
+
+            <ul>
+                {% for error in form.name.error %}
+                    <li style="coloured:red;">{{ error }}</li>
+                {% endfor %}
+            </ul>
+
+            {{ form.recaptcha }}
+
+            <div class='login_fields__submit'>
+                <input type="submit" name="submit"></input>
+                <div class='forgot'>
+                    <a href='#'>忘记密码?</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class='disclaimer'>
+        <p>这世上有三样东西是别人抢不走的：一是吃进胃里的食物，二是藏在心中的梦想，三是读进大脑的书。</p>
+    </div>
+</div>
 
 </body>
 
