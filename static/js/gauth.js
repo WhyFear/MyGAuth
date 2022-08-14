@@ -40,8 +40,6 @@
         };
     };
 
-    exports.StorageService = StorageService;
-
     // Originally based on the JavaScript implementation as provided by Russell Sayers on his Tin Isles blog:
     // http://blog.tinisles.com/2011/10/google-authenticator-one-time-password-algorithm-in-javascript/
 
@@ -113,10 +111,8 @@
         };
     };
 
-    exports.KeyUtilities = KeyUtilities;
-
     // ----------------------------------------------------------------------------
-    exports.KeysController = function () {
+    let KeysController = function () {
         let timerTick = function () {
             let epoch = Math.round(new Date().getTime() / 1000.0);
             let countDown = 30 - (epoch % 30);
@@ -156,7 +152,7 @@
 
                 if (editingEnabled) {
                     let delLink = $('<p class="ui-li-aside"><a class="ui-btn-icon-notext ui-icon-delete" href="#"></a></p>');
-                    delLink.onclick(function () {
+                    delLink.click(function () {
                         deleteAccount(index);
                     });
                     accElem.append(delLink);
@@ -202,23 +198,26 @@
 
             // Check if local storage is supported
             if (storageService.isSupported()) {
+                console.log('Local storage is supported');
                 if (!storageService.getObject('accounts')) {
                     // change here! ***************************************************************
                     addAccount('Google', '4qf3a7xav');
+                    addAccount('11111', '14qf3a7xdfgasdgav');
                 }
 
                 updateKeys();
                 setInterval(timerTick, 1000);
             } else {
                 // No support for localStorage
+                console.log('Local storage is not supported');
                 $('#updatingIn').text("x");
                 $('#accountsHeader').text("No Storage support");
             }
 
             // Bind to keypress event for the input
-            $('#addKeyButton').onclick(function () {
-                var name = $('#keyAccount').val();
-                var secret = $('#keySecret').val();
+            $('#addKeyButton').click(function () {
+                let name = $('#keyAccount').val();
+                let secret = $('#keySecret').val();
                 // remove spaces from secret
                 secret = secret.replace(/ /g, '');
                 if (secret !== '') {
@@ -230,7 +229,7 @@
                 }
             });
 
-            $('#addKeyCancel').onclick(function () {
+            $('#addKeyCancel').click(function () {
                 clearAddFields();
             });
 
@@ -239,10 +238,10 @@
                 $('#keySecret').val('');
             };
 
-            $('#edit').onclick(function () {
+            $('#edit').click(function () {
                 toggleEdit();
             });
-            $('#export').onclick(function () {
+            $('#export').click(function () {
                 // exportAccounts();
             });
         };
@@ -253,5 +252,10 @@
             deleteAccount: deleteAccount
         };
     };
+
+    // 下面这三句话应该是没用
+    exports.StorageService = StorageService;
+    exports.KeyUtilities = KeyUtilities;
+    exports.KeysController = KeysController;
 
 })(typeof exports === 'undefined' ? this['gauth'] = {} : exports);
